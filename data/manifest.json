@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "provenance": "SYNTHETIC / SIMULATED",
+  "generated_by": "tools/generate_datasets.py",
+  "generated_from": "esim_selfhealing.telemetry (TelemetryStream, fixed seeds)",
+  "t0_epoch": 1767578400.0,
+  "sample_period_s": 1.0,
+  "features": [
+    "aka_fail_rate",
+    "rsrp_dbm",
+    "drop_rate",
+    "latency_ms",
+    "ota_fail_rate"
+  ],
+  "registry": {
+    "clients": {
+      "file": "clients/clients.csv",
+      "sha256": "752b1e06035e0bfca79ecde2ecd7ac8bae7cffc2b69a5a1e91650b382724a348",
+      "rows": 3,
+      "description": "Fictional customers"
+    },
+    "groups": {
+      "file": "clients/groups.csv",
+      "sha256": "d8d34ee8c3c33d2bdfaf5847da226ec5ccfc20f079999c68f6c241d9216e68e6",
+      "rows": 4,
+      "description": "Network groups per client"
+    },
+    "devices": {
+      "file": "devices/devices.csv",
+      "sha256": "ab62798fbec56dac2cb022578a6993e3f979d6ca818414a72981ba63455a76a1",
+      "rows": 9,
+      "description": "Devices and eSIM identities. Includes the 4 devices of the real-time grid and the devices the built-in scenarios use"
+    },
+    "network": {
+      "file": "network/network_contexts.csv",
+      "sha256": "7d7699ae95ceca2fcb93c149479fc50132df8968e33b5fba7a0202d4ae7e6111",
+      "rows": 3,
+      "description": "Network contexts: PLMN, radio access and cells"
+    },
+    "authentication": {
+      "file": "authentication/auth_contexts.csv",
+      "sha256": "0be6724d6001402f70618321df5f1feb65c06fc18632d6a0040cf6dba071aa41",
+      "rows": 2,
+      "description": "Authentication contexts referenced by network contexts"
+    },
+    "rsp": {
+      "file": "rsp/rsp_environments.csv",
+      "sha256": "e11d717c907e615a2275cc39e8b8fe84ba1f23e28f85630cc610a9a8393b4c8c",
+      "rows": 2,
+      "description": "RSP environments (SM-DP+ / SM-SR); the bundled simulated model"
+    }
+  },
+  "datasets": [
+    {
+      "id": "isdp_corruption_48213",
+      "kind": "telemetry",
+      "file": "telemetry/isdp_corruption_48213.csv",
+      "title": "ISD-P corruption on a yard tracker",
+      "description": "Clean baseline with slow drift, then a profile checksum mismatch from sample 250.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.scenario_isdp_corruption(seed=42)",
+      "seed": 42,
+      "client_id": "CL-001",
+      "group_id": "GRP-101",
+      "euicc_id": "89330000000048213",
+      "cell_id": "CELL-4471",
+      "fault_class": "isdp_corruption",
+      "fleet_size": 1,
+      "sha256": "0ebb326fd9bd6470aa290cdb98ca0822af76a7428804a57b7d4c449bb77209b5"
+    },
+    {
+      "id": "key_desync_77145",
+      "kind": "telemetry",
+      "file": "telemetry/key_desync_77145.csv",
+      "title": "eUICC / SM-SR key desync on a reefer unit",
+      "description": "AKA failures rise from sample 240 while OTA downloads and latency stay normal.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.TelemetryStream(key_desync 240-300, seed=45)",
+      "seed": 45,
+      "client_id": "CL-001",
+      "group_id": "GRP-102",
+      "euicc_id": "89330000000077145",
+      "cell_id": "CELL-4471",
+      "fault_class": "key_desync",
+      "fleet_size": 1,
+      "sha256": "f502a30fda7f6a7d09850a97e2ce19fee93813ce20ec3b69c1e8bc89f5b08888"
+    },
+    {
+      "id": "shared_fleet_90031",
+      "kind": "telemetry",
+      "file": "telemetry/shared_fleet_90031.csv",
+      "title": "ISD-P corruption on a shared profile (120 devices)",
+      "description": "Same fault as the yard tracker, but the profile is shared by 120 devices.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.TelemetryStream(isdp_corruption 240-300, seed=46)",
+      "seed": 46,
+      "client_id": "CL-001",
+      "group_id": "GRP-101",
+      "euicc_id": "89330000000090031",
+      "cell_id": "CELL-6602",
+      "fault_class": "isdp_corruption",
+      "fleet_size": 120,
+      "sha256": "1b13e27b9b2bf68609fcb77d5012bb1e01388db762b9ff63088711d75182385d"
+    },
+    {
+      "id": "smdp_outage_51887",
+      "kind": "telemetry",
+      "file": "telemetry/smdp_outage_51887.csv",
+      "title": "SM-DP+ session outage on a metering gateway",
+      "description": "OTA latency spikes and sessions time out from sample 240; AKA stays broadly healthy.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.scenario_smdp_outage(seed=44)",
+      "seed": 44,
+      "client_id": "CL-002",
+      "group_id": "GRP-201",
+      "euicc_id": "89330000000051887",
+      "cell_id": "CELL-2210",
+      "fault_class": "smdp_session_outage",
+      "fleet_size": 1,
+      "sha256": "82f763c8631bff8e49b662b670ee7216415eb92ff7622179d4f4964424c4a0de"
+    },
+    {
+      "id": "slow_radio_drift_63902",
+      "kind": "telemetry",
+      "file": "telemetry/slow_radio_drift_63902.csv",
+      "title": "Slow radio degradation on a metering gateway",
+      "description": "RSRP collapses gradually from sample 200; a ramped fault with no OTA signature.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.scenario_slow_radio_drift(seed=43)",
+      "seed": 43,
+      "client_id": "CL-002",
+      "group_id": "GRP-201",
+      "euicc_id": "89330000000063902",
+      "cell_id": "CELL-8814",
+      "fault_class": "radio_degradation",
+      "fleet_size": 1,
+      "sha256": "369f958c4efbb84e62812ad55962eb058fb368b6b8669b51359e522c532051cf"
+    },
+    {
+      "id": "healthy_baseline_100004",
+      "kind": "telemetry",
+      "file": "telemetry/healthy_baseline_100004.csv",
+      "title": "Healthy baseline on a ward monitor",
+      "description": "300 nominal samples. No fault; the detector should stay quiet.",
+      "provenance": "SYNTHETIC / SIMULATED",
+      "generator": "esim_selfhealing.telemetry.TelemetryStream(no faults, seed=7)",
+      "seed": 7,
+      "client_id": "CL-003",
+      "group_id": "GRP-301",
+      "euicc_id": "89330000000100004",
+      "cell_id": "CELL-LIVE-4",
+      "fault_class": null,
+      "fleet_size": 1,
+      "sha256": "8498c7472d44c8018ba2b7e8218eb7c877f847105cd5668b1fd93b92f7bb923a"
+    }
+  ]
+}
